@@ -154,7 +154,13 @@ export const useCurrentActive = (props: CurrentActiveProps): boolean|undefined =
         (currentPathname === targetPathname) // exact match
         ||
         (
-            !(props.end ?? false) // sub match
+            !(
+                // user defined:
+                props.end
+                ??
+                // default:
+                (targetPathname === '/') // for home page always exact match, otherwise sub match
+            ) // sub match
             &&
             (
                 currentPathname.startsWith(targetPathname)
