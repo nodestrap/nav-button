@@ -57,7 +57,7 @@ const _useResolvedPath = (to) => {
         return useResolvedPath; // hack: conditionally call react hook
     })()(to).pathname;
 };
-const useCurrentActive = (props) => {
+export const useCurrentActive = (props) => {
     if (typeof (window) === 'undefined')
         return undefined; // server side rendering => not supported yet
     const children = props.children;

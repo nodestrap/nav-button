@@ -126,7 +126,7 @@ export interface CurrentActiveProps {
     // children:
     children?      : React.ReactNode
 }
-const useCurrentActive = (props: CurrentActiveProps): boolean|undefined => {
+export const useCurrentActive = (props: CurrentActiveProps): boolean|undefined => {
     if (typeof(window) === 'undefined') return undefined; // server side rendering => not supported yet
     
     

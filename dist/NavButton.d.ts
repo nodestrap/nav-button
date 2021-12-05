@@ -8,6 +8,7 @@ export interface CurrentActiveProps {
     end?: boolean;
     children?: React.ReactNode;
 }
+export declare const useCurrentActive: (props: CurrentActiveProps) => boolean | undefined;
 export interface NavButtonProps extends ButtonProps, CurrentActiveProps {
 }
 export declare function NavButton(props: NavButtonProps): JSX.Element;
