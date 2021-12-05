@@ -1,12 +1,18 @@
 // react:
 import { default as React, } from 'react'; // base technology of our nodestrap components
-import { useInRouterContext, useResolvedPath, } from 'react-router';
-// others libs:
-import { parsePath, } from 'history';
+// doesn't work:
+// import {
+//     useInRouterContext,
+//     useResolvedPath,
+// }                        from 'react-router'
+import * as reactRouter from 'react-router';
+import * as history from 'history';
 import { 
 // utilities:
 isReactRouterLink, isNextLink, } from '@nodestrap/action-control';
 import { Button, } from '@nodestrap/button';
+const { useInRouterContext, useResolvedPath, } = reactRouter;
+const { parsePath, } = history;
 /* forked from react-router v6 */
 export const resolvePath = (to, fromPathname = '/') => {
     const { pathname: toPathname, } = (typeof (to) === 'string') ? parsePath(to) : to;

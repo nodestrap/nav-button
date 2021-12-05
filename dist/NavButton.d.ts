@@ -1,5 +1,5 @@
 import { default as React } from 'react';
-import { To } from 'history';
+import type { To } from 'history';
 import { OrientationName, OrientationVariant } from '@nodestrap/basic';
 import { ButtonStyle, ButtonVariant, ButtonType, ButtonProps } from '@nodestrap/button';
 export declare const resolvePath: (to: To, fromPathname?: string) => string;

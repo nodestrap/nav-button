@@ -2,16 +2,23 @@
 import {
     default as React,
 }                           from 'react'         // base technology of our nodestrap components
-import {
-    useInRouterContext,
-    useResolvedPath,
-}                           from 'react-router'
+// doesn't work:
+// import {
+//     useInRouterContext,
+//     useResolvedPath,
+// }                        from 'react-router'
+import * as reactRouter     from 'react-router'
 
 // others libs:
-import {
+// doesn't work:
+// import {
+//     To,
+//     parsePath,
+// }                        from 'history'
+import type {
     To,
-    parsePath,
 }                           from 'history'
+import * as history         from 'history'
 
 // nodestrap components:
 import {
@@ -36,6 +43,16 @@ import {
     ButtonProps,
     Button,
 }                           from '@nodestrap/button'
+
+
+
+const {
+    useInRouterContext,
+    useResolvedPath,
+} = reactRouter;
+const {
+    parsePath,
+} = history;
 
 
 
