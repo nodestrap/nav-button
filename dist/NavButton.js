@@ -90,16 +90,17 @@ export function NavButton(props) {
     // rest props:
     const { 
     // accessibilities:
-    active, ...restProps } = props;
+    active, press, ...restProps } = props;
     // fn props:
     const activeDn = useCurrentActive(props);
     const activeFn = active ?? activeDn;
+    const pressFn = press ?? activeDn;
     // jsx:
     return (React.createElement(Button
     // other props:
     , { ...restProps, "aria-current": props['aria-current'] ?? (activeFn ? 'page' : undefined), 
         // accessibilities:
-        active: activeFn }));
+        active: activeFn, press: pressFn }));
 }
 NavButton.prototype = Button.prototype; // mark as Button compatible
 export { NavButton as default };

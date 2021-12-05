@@ -186,6 +186,7 @@ export function NavButton(props: NavButtonProps) {
     const {
         // accessibilities:
         active,
+        press,
     ...restProps} = props;
     
     
@@ -193,6 +194,7 @@ export function NavButton(props: NavButtonProps) {
     // fn props:
     const activeDn = useCurrentActive(props);
     const activeFn = active ?? activeDn;
+    const pressFn  = press  ?? activeDn;
     
     
     
@@ -209,6 +211,7 @@ export function NavButton(props: NavButtonProps) {
             
             // accessibilities:
             active={activeFn}
+            press={pressFn}
         />
     );
 }
