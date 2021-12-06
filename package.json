@@ -1,6 +1,6 @@
 {
   "name": "@nodestrap/nav-button",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "description": "A clickable component for navigation.",
   "type": "module",
   "main": "dist/NavButton.js",
@@ -34,6 +34,7 @@
     "@nodestrap/action-control": "^4.0.10",
     "@nodestrap/basic": "^4.0.3",
     "@nodestrap/button": "^4.0.3",
+    "@nodestrap/hooks": "^4.0.0",
     "@types/react": "^17.0.37",
     "history": "^5.1.0",
     "react": "^17.0.2",

@@ -1,6 +1,7 @@
 // react:
 import {
     default as React,
+    useState,
 }                           from 'react'         // base technology of our nodestrap components
 // doesn't work:
 // import {
@@ -8,6 +9,11 @@ import {
 //     useResolvedPath,
 // }                        from 'react-router'
 import * as reactRouter     from 'react-router'
+
+// nodestrap utilities:
+import {
+    useIsomorphicLayoutEffect,
+}                           from '@nodestrap/hooks'
 
 // others libs:
 // doesn't work:
@@ -140,6 +146,18 @@ export const useCurrentActive = (props: CurrentActiveProps): boolean|undefined =
     // let currentPathname = useLocation().pathname;        // only works in react-router
     let currentPathname = window?.location?.pathname ?? ''; // works both in react-router & nextjs
     let targetPathname = _useInRouterContext() ? _useResolvedPath(to) : resolvePath(to, currentPathname);
+    
+    
+    
+    /* server side rendering support */
+    /* always return `undefined` on the first render */
+    /* so the DOM is always the same at the server & client */
+    const [loaded, setLoaded] = useState(false);
+    useIsomorphicLayoutEffect(() => {
+        // setups:
+        setLoaded(true); // trigger to re-render
+    }, []); // run the setups once
+    if (!loaded) return undefined;
     
     
     
