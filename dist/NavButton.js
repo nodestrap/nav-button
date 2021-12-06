@@ -60,15 +60,6 @@ const _useResolvedPath = (to) => {
     })()(to).pathname;
 };
 export const useCurrentActive = (props) => {
-    if (typeof (window) === 'undefined')
-        return undefined; // server side rendering => not supported yet
-    const children = props.children;
-    const to = isReactRouterLink(children) ? children.props.to : (isNextLink(children) ? children.props.href : undefined);
-    if (to === undefined)
-        return undefined; // neither ReactRouterLink nor NextLink exists
-    // let currentPathname = useLocation().pathname;        // only works in react-router
-    let currentPathname = window?.location?.pathname ?? ''; // works both in react-router & nextjs
-    let targetPathname = _useInRouterContext() ? _useResolvedPath(to) : resolvePath(to, currentPathname);
     /* server side rendering support */
     /* always return `undefined` on the first render */
     /* so the DOM is always the same at the server & client */
@@ -79,6 +70,15 @@ export const useCurrentActive = (props) => {
     }, []); // run the setups once
     if (!loaded)
         return undefined;
+    if (typeof (window) === 'undefined')
+        return undefined; // server side rendering => not supported yet
+    const children = props.children;
+    const to = isReactRouterLink(children) ? children.props.to : (isNextLink(children) ? children.props.href : undefined);
+    if (to === undefined)
+        return undefined; // neither ReactRouterLink nor NextLink exists
+    // let currentPathname = useLocation().pathname;        // only works in react-router
+    let currentPathname = window?.location?.pathname ?? ''; // works both in react-router & nextjs
+    let targetPathname = _useInRouterContext() ? _useResolvedPath(to) : resolvePath(to, currentPathname);
     if (!(props.caseSensitive ?? false)) {
         currentPathname = currentPathname.toLocaleLowerCase();
         targetPathname = targetPathname.toLocaleLowerCase();
