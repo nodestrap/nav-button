@@ -141,16 +141,17 @@ export const useCurrentActive = (props: CurrentActiveProps): boolean|undefined =
         // setups:
         setLoaded(true); // trigger to re-render
     }, []); // run the setups once
-    if (!loaded) return undefined;
     
     
     
+    /* conditionally return - ALWAYS return on server side - NEVER return on client side - it's safe */
     if (typeof(window) === 'undefined') return undefined; // server side rendering => not supported yet
     
     
     
     const children = props.children;
     const to = isReactRouterLink(children) ? children.props.to : (isNextLink(children) ? children.props.href : undefined);
+    /* conditionally return - ASSUMES the children are never changed - ALWAYS return the same - it's 99% safe */
     if (to === undefined) return undefined; // neither ReactRouterLink nor NextLink exists
     
     
@@ -158,6 +159,11 @@ export const useCurrentActive = (props: CurrentActiveProps): boolean|undefined =
     // let currentPathname = useLocation().pathname;        // only works in react-router
     let currentPathname = window?.location?.pathname ?? ''; // works both in react-router & nextjs
     let targetPathname = _useInRouterContext() ? _useResolvedPath(to) : resolvePath(to, currentPathname);
+    
+    
+    
+    /* conditionally return AFTER hooks - it's safe */
+    if (!loaded) return undefined;
     
     
     
