@@ -109,7 +109,7 @@ export function NavButton(props) {
     // fn props:
     const activeDn = useCurrentActive(props);
     const activeFn = active ?? activeDn;
-    const pressFn = press ?? activeDn;
+    const pressFn = press ?? (activeDn || undefined); // if not active => set undefined so the user can activate (press) it
     // jsx:
     return (React.createElement(Button
     // other props:
