@@ -13,7 +13,9 @@ import {
 // utilities:
 isReactRouterLink, isNextLink, } from '@nodestrap/action-control';
 import { Button, } from '@nodestrap/button';
-const { useInRouterContext, useResolvedPath, } = reactRouter;
+const { useInRouterContext: _useInRouterContext, // rename the hook, so we can call it conditionally
+useResolvedPath: _useResolvedPath, // rename the hook, so we can call it conditionally
+ } = reactRouter;
 const { parsePath, } = history;
 /* forked from react-router v6 */
 export const resolvePath = (to, fromPathname = '/') => {
@@ -48,17 +50,6 @@ const resolveRelativePath = (relativePath, fromPathname) => {
     });
     return (segments.length > 1) ? segments.join('/') : '/';
 };
-// hacks:
-const _useInRouterContext = () => {
-    return (() => {
-        return useInRouterContext; // hack: conditionally call react hook
-    })()();
-};
-const _useResolvedPath = (to) => {
-    return (() => {
-        return useResolvedPath; // hack: conditionally call react hook
-    })()(to).pathname;
-};
 export const useCurrentActive = (props) => {
     /* server side rendering support */
     /* always return `undefined` on the first render */
@@ -78,7 +69,7 @@ export const useCurrentActive = (props) => {
         return undefined; // neither ReactRouterLink nor NextLink exists
     // let currentPathname = useLocation().pathname;        // only works in react-router
     let currentPathname = window?.location?.pathname ?? ''; // works both in react-router & nextjs
-    let targetPathname = _useInRouterContext() ? _useResolvedPath(to) : resolvePath(to, currentPathname);
+    let targetPathname = _useInRouterContext() ? _useResolvedPath(to).pathname : resolvePath(to, currentPathname);
     /* conditionally return AFTER hooks - it's safe */
     if (!loaded)
         return undefined;

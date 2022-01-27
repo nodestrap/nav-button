@@ -53,8 +53,8 @@ import {
 
 
 const {
-    useInRouterContext,
-    useResolvedPath,
+    useInRouterContext : _useInRouterContext, // rename the hook, so we can call it conditionally
+    useResolvedPath    : _useResolvedPath,    // rename the hook, so we can call it conditionally
 } = reactRouter;
 const {
     parsePath,
@@ -108,20 +108,6 @@ const resolveRelativePath = (relativePath: string, fromPathname: string): string
 
 
 
-// hacks:
-const _useInRouterContext = (): boolean => {
-    return (() => {
-        return useInRouterContext; // hack: conditionally call react hook
-    })()();
-};
-const _useResolvedPath = (to: To): string => {
-    return (() => {
-        return useResolvedPath; // hack: conditionally call react hook
-    })()(to).pathname;
-};
-
-
-
 // hooks:
 export interface CurrentActiveProps {
     // nav matches:
@@ -158,7 +144,7 @@ export const useCurrentActive = (props: CurrentActiveProps): boolean|undefined =
     
     // let currentPathname = useLocation().pathname;        // only works in react-router
     let currentPathname = window?.location?.pathname ?? ''; // works both in react-router & nextjs
-    let targetPathname = _useInRouterContext() ? _useResolvedPath(to) : resolvePath(to, currentPathname);
+    let targetPathname = _useInRouterContext() ? _useResolvedPath(to).pathname : resolvePath(to, currentPathname);
     
     
     
