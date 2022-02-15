@@ -1,6 +1,6 @@
 {
   "name": "@nodestrap/nav-button",
-  "version": "4.0.10",
+  "version": "4.0.11",
   "description": "A clickable component for navigation.",
   "type": "module",
   "main": "dist/NavButton.js",
@@ -33,9 +33,9 @@
   "dependencies": {
     "@nodestrap/action-control": "^4.0.17",
     "@nodestrap/basic": "^4.0.7",
-    "@nodestrap/button": "^4.0.5",
+    "@nodestrap/button": "^4.0.7",
     "@nodestrap/hooks": "^4.0.1",
-    "@types/react": "^17.0.38",
+    "@types/react": "^17.0.39",
     "history": "^5.2.0",
     "react": "^17.0.2",
     "react-router": "^6.2.1"

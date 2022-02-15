@@ -96,17 +96,16 @@ export function NavButton(props) {
     // rest props:
     const { 
     // accessibilities:
-    active, press, ...restProps } = props;
+    active, ...restProps } = props;
     // fn props:
     const activeDn = useCurrentActive(props);
     const activeFn = active ?? activeDn;
-    const pressFn = press ?? (activeDn || undefined); // if not active => set undefined so the user can activate (press) it
     // jsx:
     return (React.createElement(Button
     // other props:
     , { ...restProps, "aria-current": props['aria-current'] ?? (activeFn ? 'page' : undefined), 
         // accessibilities:
-        active: activeFn, press: pressFn }));
+        active: activeFn }));
 }
 NavButton.prototype = Button.prototype; // mark as Button compatible
 export { NavButton as default };
