@@ -34,8 +34,7 @@ import {
 }                           from '@nodestrap/basic'
 import {
     // utilities:
-    isReactRouterLink,
-    isNextLink,
+    isClientSideLink,
 }                           from '@nodestrap/action-control'
 import {
     // hooks:
@@ -135,8 +134,7 @@ export const useCurrentActive = (props: CurrentActiveProps): boolean|undefined =
     
     
     
-    const children = props.children;
-    const to = isReactRouterLink(children) ? children.props.to : (isNextLink(children) ? children.props.href : undefined);
+    const to = isClientSideLink(props.children);
     /* conditionally return - ASSUMES the children are never changed - ALWAYS return the same - it's 99% safe */
     if (to === undefined) return undefined; // neither ReactRouterLink nor NextLink exists
     

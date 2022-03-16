@@ -11,7 +11,7 @@ import { useIsomorphicLayoutEffect, } from '@nodestrap/hooks';
 import * as history from 'history';
 import { 
 // utilities:
-isReactRouterLink, isNextLink, } from '@nodestrap/action-control';
+isClientSideLink, } from '@nodestrap/action-control';
 import { Button, } from '@nodestrap/button';
 const { useInRouterContext: _useInRouterContext, // rename the hook, so we can call it conditionally
 useResolvedPath: _useResolvedPath, // rename the hook, so we can call it conditionally
@@ -62,8 +62,7 @@ export const useCurrentActive = (props) => {
     /* conditionally return - ALWAYS return on server side - NEVER return on client side - it's safe */
     if (typeof (window) === 'undefined')
         return undefined; // server side rendering => not supported yet
-    const children = props.children;
-    const to = isReactRouterLink(children) ? children.props.to : (isNextLink(children) ? children.props.href : undefined);
+    const to = isClientSideLink(props.children);
     /* conditionally return - ASSUMES the children are never changed - ALWAYS return the same - it's 99% safe */
     if (to === undefined)
         return undefined; // neither ReactRouterLink nor NextLink exists
